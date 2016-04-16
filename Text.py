@@ -44,9 +44,11 @@ def get_wiki(word):
     # <title>記事のタイトル</title>
     #title = root.find('title').text.encode('utf-8')
     title = root.find('title').text
+    print(title)
     if title == word:
       text = root.find('revision').find('text').text
-      return text
+      break
+  return text
     #print(title)
 
 
