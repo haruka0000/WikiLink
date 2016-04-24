@@ -2,8 +2,9 @@ import Text
 import Titles
 
 if __name__ == '__main__':
-  target = "5W1H"
-  text = Text.get_wiki("言語")
+  start = "インフィニットストラトス"
+  target = "井上麻里奈"
+  text = Text.get_wiki(start)[2]
   words = Titles.get_titles(text)
   print(words)
 
@@ -18,8 +19,8 @@ if __name__ == '__main__':
       break
       
     for w in words:
-      text = Text.get_wiki(w)
-      sub_words = set(Text.get_wiki(text))
+      text = Text.get_wiki(w)[2]
+      sub_words = set(Titles.get_titles(text))
       all_words = all_words.union(sub_words)
       if target in sub_words:
         print("#### Find!! ####")
