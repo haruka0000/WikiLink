@@ -1,5 +1,6 @@
 import Text
 import Titles
+import TweetWord
 
 if __name__ == '__main__':
   #start = "有川浩"
@@ -18,7 +19,21 @@ if __name__ == '__main__':
   
   target_text = Text.get_wiki(target)[2]  ## [id,title,text]
   target_words = list(set(Titles.get_titles(target_text)))
+  twtr_words = TweetWord.twt_words(target)
+  print("============ GET FROM TWITTER =============")
+  print(twtr_words)
+  filter_words = []   ## targetに関する単語の数を絞るために使用
+  
+  if len(set(target_words).intersection(set(twtr_words))) != 0:
+    ## 「targetに関する単語」と、「Twitterより取得したtargetに関する単語」の論理積を取り、更に語を絞る
+    filter_words = list(set(target_words).intersection(set(twtr_words)))[:]
+    print("============ FILTER CHANGE!! ============")
+    print(filter_words)
+  else:
+    ## 論理積が０になった場合は「targetに関する単語」をそのまま使用する
+    filter_words = target_words[:]
 
+  
   while True:
     next_routes = []
     if target == str(result[-1]):
@@ -34,7 +49,8 @@ if __name__ == '__main__':
       print("### ")
       print(words)
 
-      if len(set(target_words).intersection(set(words))) != 0:
+      ## filter_wordsで単語を絞り、計算量を減らす
+      if len(set(target_words).intersection(set(filter_words))) != 0:
         words = list(set(target_words).intersection(set(words)))[:]
         print("======== CHANGE! ========")
         print(words)
