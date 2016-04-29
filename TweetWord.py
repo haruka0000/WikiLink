@@ -38,7 +38,7 @@ def twt_words(target):
     text = t['text']
     #print(text)
     words = words.union(set(Titles.get_titles(text)))
-  print(words)
+  #print(words)
   return list(words)
 
 #twt_words("井上麻里奈")

@@ -17,6 +17,11 @@ if __name__ == '__main__':
 
   routes.append([start])
   
+  ## startの単語を絞る（start単語に関連する見出し語 && twitterから取れる関連語）
+  twtr_start = TweetWord.twt_words(start)
+  print("##  START WORDS FROM TWITTER")
+  print(twtr_start)
+
   target_text = Text.get_wiki(target)[2]  ## [id,title,text]
   target_words = list(set(Titles.get_titles(target_text)))
   twtr_words = TweetWord.twt_words(target)
@@ -48,6 +53,13 @@ if __name__ == '__main__':
         break
       print("### ")
       print(words)
+      
+      if len(routes)==1:
+        if len(set(words).intersection(set(twtr_start))) != 0:
+          words = list(set(words).intersection(set(twtr_start)))[:]
+          print("========== START WORDS FILTERED BY TWITTERS WORDS ==========")
+          print(words)
+
 
       ## filter_wordsで単語を絞り、計算量を減らす
       if len(set(target_words).intersection(set(filter_words))) != 0:
