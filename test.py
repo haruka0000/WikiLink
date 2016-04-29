@@ -1,6 +1,6 @@
 import Text
 import Titles
-import TweetWord
+import TweetWords
 
 if __name__ == '__main__':
   #start = "有川浩"
@@ -18,13 +18,13 @@ if __name__ == '__main__':
   routes.append([start])
   
   ## startの単語を絞る（start単語に関連する見出し語 && twitterから取れる関連語）
-  twtr_start = TweetWord.twt_words(start)
+  twtr_start = TweetWords.twt_words(start)
   print("##  START WORDS FROM TWITTER")
   print(twtr_start)
 
   target_text = Text.get_wiki(target)[2]  ## [id,title,text]
   target_words = list(set(Titles.get_titles(target_text)))
-  twtr_words = TweetWord.twt_words(target)
+  twtr_words = TweetWords.twt_words(target)
   print("============ GET FROM TWITTER =============")
   print(twtr_words)
   filter_words = []   ## targetに関する単語の数を絞るために使用

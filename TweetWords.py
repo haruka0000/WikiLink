@@ -54,7 +54,7 @@ def wordsCount(target):
 
   sorted_dict = {}
   sorted_dict = sorted(count_dict.items(), key=lambda x:x[1], reverse = True)
-  print(sorted_dict)
+  #print(sorted_dict)
   return sorted_dict
 
 def twt_words(target):
@@ -63,6 +63,6 @@ def twt_words(target):
   for sw in s_words:
     words.append(sw[0])
   return words
-print(twt_words("井上麻里奈"))
+#print(twt_words("井上麻里奈"))
 #twt_words("井上麻里奈")
 #twt_words("#ann0")

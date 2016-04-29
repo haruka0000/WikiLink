@@ -16,7 +16,7 @@ from twitter import *
 import urllib.request
 import Titles
 
-def twt_get(target):
+def twt_get(s):
   # OAuth2.0用のキーを取得する
   with open("secret.json") as f:
     secretjson = json.load(f)
@@ -26,25 +26,26 @@ def twt_get(target):
   print("## clear access 01 ##")
   # 検索する
   try:
-    t_words = t.search.tweets(q=target,count=100)
+    t_words = t.search.tweets(q=s,count=100000)
     return t_words
   except:
     return "ERROR!!"
     exit()
 
-def got_words(target):
+def got_words(sample):
   words = []
-  for t in twt_get(target)['statuses']:
-    text = t['text']
-    #print(text)
-    words = words + Titles.get_titles(text)
+  for s in sample:
+    for t in twt_get(s)['statuses']:
+      text = t['text']
+      #print(text)
+      words = words + Titles.get_titles(text)
     words = sorted(words)
-  #print(words)
+    #print(words)
   return words
 
-def wordsCount(target):
+def wordsCount(sample):
   count_dict = {}
-  words = got_words(target)
+  words = got_words(sample)
 
   for ws in list(set(words)):      #0で初期化
     count_dict[ws] = 0
@@ -54,15 +55,19 @@ def wordsCount(target):
 
   sorted_dict = {}
   sorted_dict = sorted(count_dict.items(), key=lambda x:x[1], reverse = True)
-  print(sorted_dict)
+  #print(sorted_dict)
   return sorted_dict
 
-def twt_words(target):
+def general_words(sample):
   words = []
-  s_words = wordsCount(target)
+  s_words = wordsCount(sample)
   for sw in s_words:
-    words.append(sw[0])
+    if sw[1] >= 20:
+      words.append(sw[0])
   return words
-print(twt_words("井上麻里奈"))
+
+#sample = ["今日","最近","RT","私","拡散"]
+#print(general_words(sample))
+#general_words(["今日"])
 #twt_words("井上麻里奈")
 #twt_words("#ann0")
