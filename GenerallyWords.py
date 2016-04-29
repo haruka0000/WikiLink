@@ -32,14 +32,37 @@ def twt_get(target):
     return "ERROR!!"
     exit()
 
-def twt_words(target):
-  words = set([])
+def got_words(target):
+  words = []
   for t in twt_get(target)['statuses']:
     text = t['text']
     #print(text)
-    words = words.union(set(Titles.get_titles(text)))
+    words = words + Titles.get_titles(text)
+    words = sorted(words)
   #print(words)
-  return list(words)
+  return words
 
+def wordsCount(target):
+  count_dict = {}
+  words = got_words(target)
+
+  for ws in list(set(words)):      #0で初期化
+    count_dict[ws] = 0
+
+  for w in words:                 #カウント
+    count_dict[w] = count_dict[w] + 1
+
+  sorted_dict = {}
+  sorted_dict = sorted(count_dict.items(), key=lambda x:x[1], reverse = True)
+  print(sorted_dict)
+  return sorted_dict
+
+def twt_words(target):
+  words = []
+  s_words = wordsCount(target)
+  for sw in s_words:
+    words.append(sw[0])
+  return words
+print(twt_words("井上麻里奈"))
 #twt_words("井上麻里奈")
 #twt_words("#ann0")
