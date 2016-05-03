@@ -26,7 +26,7 @@ def twt_get(s):
   print("## clear access 01 ##")
   # 検索する
   try:
-    t_words = t.search.tweets(q=s,count=100000)
+    t_words = t.search.tweets(q=s,count=100)
     return t_words
   except:
     return "ERROR!!"
@@ -66,8 +66,16 @@ def general_words(sample):
       words.append(sw[0])
   return words
 
-#sample = ["今日","最近","RT","私","拡散"]
-#print(general_words(sample))
+if __name__ == '__main__': 
+  f = open('General_words.txt', 'w') # 書き込みモードで開く 
+  sample = ["今日","最近","RT","私","拡散"]
+  for i in range(0,3):
+    sample = list(set(sample).union(set(general_words(sample))))
+  for s in sample:
+    f.write(s + ",") # 引数の文字列をファイルに書き込む
+  f.close() # ファイルを閉じる
+  print(sample)
+
 #general_words(["今日"])
 #twt_words("井上麻里奈")
 #twt_words("#ann0")

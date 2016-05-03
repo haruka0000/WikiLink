@@ -1,7 +1,7 @@
 import Text
 import Titles
 import TweetWords
-import GenerallyWords as GW
+#import GenerallyWords as GW
 
 def wordLink():
   #start = "有川浩"
@@ -12,8 +12,12 @@ def wordLink():
   #text = Text.get_wiki(start)[2]  ## [id,title,text]
   #words = Titles.get_titles(text)
   #print(words)
-  sample = ["以外","好き","今日","RT","拡散","最近","フォロ","ワー","放送","発売","画像","定期"]
-  gen_words = GW.general_words(sample)
+  
+  f = open('General_words.txt', 'r')
+  filetext = ""
+  for line in f:
+    filetext = filetext + line
+  gen_words = filetext.split(",")[0:-1]
   print(gen_words)
 
   routes = []
