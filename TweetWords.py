@@ -16,18 +16,21 @@ from twitter import *
 import urllib.request
 import Titles
 
-def twt_get(target):
-  # OAuth2.0用のキーを取得する
-  with open("secret.json") as f:
-    secretjson = json.load(f)
+# OAuth2.0用のキーを取得する
+with open("secret.json") as f:
+  secretjson = json.load(f)
 
-  # Twitterへの接続
-  t = Twitter(auth=OAuth(secretjson["access_token"], secretjson["access_token_secret"], secretjson["consumer_key"], secretjson["consumer_secret"]))
-  print("## clear access 01 ##")
+# Twitterへの接続
+t = Twitter(auth=OAuth(secretjson["access_token"], secretjson["access_token_secret"], secretjson["consumer_key"], secretjson["consumer_secret"]))
+print("## clear access 01 ##")
+# 検索する
+
+
+def twt_get(target):
   # 検索する
   try:
-    t_words = t.search.tweets(q=target,count=100)
-    return t_words
+    t_texts = t.search.tweets(q=target,count=100)
+    return t_texts
   except:
     return "ERROR!!"
     exit()
@@ -63,6 +66,17 @@ def twt_words(target):
   for sw in s_words:
     words.append(sw[0])
   return words
+
+def twt_texts(target):
+  texts = []
+  for t in twt_get(target)['statuses']:
+    #print(t['text'])
+    #print("==============================================")
+    texts.append(t['text'])
+  return texts
+
+
+#print(twt_texts("井上麻里奈 物語"))
 #print(twt_words("井上麻里奈"))
 #twt_words("井上麻里奈")
 #twt_words("#ann0")

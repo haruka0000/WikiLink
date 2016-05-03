@@ -5,14 +5,14 @@ import GenerallyWords as GW
 
 def wordLink():
   #start = "有川浩"
-  start = "クリアファイル"
+  start = "広島カープ"
   #target = "マッチ"
   #start = "僕は友達が少ない"
   target = "井上麻里奈"
   #text = Text.get_wiki(start)[2]  ## [id,title,text]
   #words = Titles.get_titles(text)
   #print(words)
-  sample = ["今日","RT","拡散","最近","フォロ","ワー","放送","発売","画像"]
+  sample = ["以外","好き","今日","RT","拡散","最近","フォロ","ワー","放送","発売","画像","定期"]
   gen_words = GW.general_words(sample)
   print(gen_words)
 
@@ -55,5 +55,28 @@ def wordLink():
         next_routes.append(new_route)
         print(new_route)
 
-    routes = next_routes[:]     
+    routes = next_routes[:]
+  return result
 
+
+def srcTwt():
+  route = wordLink()
+  
+  print("\n\n\n====================================================")
+
+  for i in range(1,len(route)):
+    word_pair = route[i-1] + " " + route[i]
+    link_text = TweetWords.twt_texts(word_pair)
+    print("___________________________________________________")
+    for l in link_text:
+      excp_words =  ["RT","http","@","定期"] 
+      disp = True
+      for e in excp_words:
+        if e in l:
+          disp = False
+          break
+      if disp:
+        print("　→　「" + route[i-1] + "といえば、" + l + "」")
+        break
+
+srcTwt()
