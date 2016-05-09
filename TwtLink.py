@@ -5,7 +5,7 @@ import TweetWords
 
 def wordLink():
   #start = "有川浩"
-  start = "広島カープ"
+  start = "革命"
   #target = "マッチ"
   #start = "僕は友達が少ない"
   target = "井上麻里奈"
@@ -36,7 +36,12 @@ def wordLink():
 
     for r in routes:
       tgt_words = list(set(tgt_words) - set(r[-1]))[:]
-      words = list(set(TweetWords.twt_words(r[-1])) - set(gen_words))
+      if len(r) >= 2:
+        words = list(set(TweetWords.twt_words(r[-1]+" "+r[-2])) - set(gen_words))
+        if len(words) == 0:
+          words = list(set(TweetWords.twt_words(r[-1])) - set(gen_words))
+      else:
+        words = list(set(TweetWords.twt_words(r[-1])) - set(gen_words))
       if target in words:
         result = r[:]
         result.append(target)
