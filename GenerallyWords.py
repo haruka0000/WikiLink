@@ -35,7 +35,7 @@ def twt_get(s):
       wait_m = 5
       time.sleep(wait_m * 60)
       
-    print("## accessing... ##")
+    print("## accessing... ##" + str(s))
     
     # 検索する
     t_words = t.search.tweets(q=s,count=100)
@@ -111,6 +111,8 @@ if __name__ == '__main__':
       f.write(g + ",") # 引数の文字列をファイルに書き込む
     f.close() # ファイルを閉じる
     
+    print(gen_words)
+
     aft_len = len(gen_words)
 
     if bef_len == aft_len:
