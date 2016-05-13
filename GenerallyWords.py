@@ -34,16 +34,12 @@ def twt_get(s):
       print("#### Waiting 15 minutes to recover access limit (1) ####")
       wait_m = 5
       time.sleep(wait_m * 60)
-<<<<<<< HEAD
+  
   except:
     print("\n\nERROR\n\n")
 
 
-  print("## accessing... ##")
-=======
-      
-    print("## accessing... ##" + str(s))
->>>>>>> 8ccfc88b5810dc691b35ec606fddc35e3c7156d8
+  print("## accessing... ##" + str(s))
     
   try:
     # 検索する
