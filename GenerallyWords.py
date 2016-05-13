@@ -34,11 +34,16 @@ def twt_get(s):
       print("#### Waiting 15 minutes to recover access limit (1) ####")
       wait_m = 5
       time.sleep(wait_m * 60)
+<<<<<<< HEAD
   except:
     print("\n\nERROR\n\n")
 
 
   print("## accessing... ##")
+=======
+      
+    print("## accessing... ##" + str(s))
+>>>>>>> 8ccfc88b5810dc691b35ec606fddc35e3c7156d8
     
   try:
     # 検索する
@@ -122,6 +127,8 @@ if __name__ == '__main__':
       f.write(g + ",") # 引数の文字列をファイルに書き込む
     f.close() # ファイルを閉じる
     
+    print(gen_words)
+
     aft_len = len(gen_words)
 
     if bef_len == aft_len:
