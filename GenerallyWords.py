@@ -31,17 +31,28 @@ def twt_get(s):
       print(k + " " + str(v))
     
     if limit['resources']['search']['/search/tweets']['remaining'] == 1:
-      print("#### Waiting 15 minutes to recover access limit ####")
+      print("#### Waiting 15 minutes to recover access limit (1) ####")
       wait_m = 5
       time.sleep(wait_m * 60)
-      
-    print("## accessing... ##")
+  except:
+    print("\n\nERROR\n\n")
+
+
+  print("## accessing... ##")
     
+  try:
     # 検索する
     t_words = t.search.tweets(q=s,count=100)
-    return t_words
-  except:
-    return []
+    for tw in t_words:
+      print(tw)
+      print("==========================")
+      #for k in tw:
+        #print(k)
+  except Exception as e:
+    print("\n=========== ERROR ===========")
+    print(e.args[0].split("\n")[1])
+    print("\n")
+  return t_words
 
 def got_words(sample):
   words = []
